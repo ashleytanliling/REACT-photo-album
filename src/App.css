@@ -1,22 +1,27 @@
 .App {
-  text-align: center;
+  /* text-align: center; */
+  font-family: 'Patrick Hand', cursive;
 }
 
-.App-logo {
-  height: 40vmin;
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.mainNav {
   display: flex;
-  flex-direction: column;
   align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  background-color: #6781e0;
+  padding: 0px 20px;
+  color: #8fed85;
+  justify-content: space-between;
 }
 
-.App-link {
-  color: #09d3ac;
+.logo i {
+  color: yellow;
+  font-size: 38px;
+}
+
+.nav {
+  font-size: 32px;
+} */
+
+a:-webkit-any-link {
+  text-decoration: none;
+  color: #8fed85;
 }
