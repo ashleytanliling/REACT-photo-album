@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router, Route, Link, Switch, Redirect } from "react-router-dom";
+import { BrowserRouter as Router, Route, Switch, Redirect } from "react-router-dom";
 import './App.css';
 import { photosData } from './assets/photosData';
 import Photos from './Components/Photos';
@@ -11,14 +11,9 @@ function App() {
     <div className="App">
       <header className="App-header">
           <Router>
-          <div className="mainNav">
-            <h1 className="logo"><i class="fas fa-paw"></i> Ash</h1>
-            <div className="nav">
-              <Link to="/"><i class="fas fa-globe-asia"></i> Home</Link>
-              <Link to="/photos"><i class="far fa-images"></i> Photos</Link>
-              <Link to="/details">Details</Link>
+            <div className="mainNav">
+                <h1 className="logo"><i className="fas fa-paw"></i> Ash</h1>
             </div>
-          </div>
             <Switch>
               <Route exact path="/" component={Map} />
               <Route exact path="/photos" component={() => <Photos photosArray={photosData} />} />
@@ -28,8 +23,6 @@ function App() {
           </Router>
       </header>
     </div>  
-      
-    
   );
 }
 

@@ -1,6 +1,6 @@
 .App {
   /* text-align: center; */
-  font-family: 'Patrick Hand', cursive;
+  font-family: "Patrick Hand", cursive;
 }
 
 .mainNav {
@@ -19,7 +19,7 @@
 
 .nav {
   font-size: 32px;
-} */
+}
 
 a:-webkit-any-link {
   text-decoration: none;

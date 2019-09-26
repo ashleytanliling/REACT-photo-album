@@ -1,0 +1,41 @@
+body {
+  text-align: center;
+}
+
+.mainNav {
+}
+
+input[type="checkbox" i] {
+  font-size: 32px;
+}
+
+form {
+  font-size: 25px;
+}
+
+label {
+  margin: 10px 50px 0px 0px;
+}
+
+p {
+  display: inline-flex;
+  justify-content: center;
+  background-color: yellow;
+  padding: 0px 20px;
+  margin: 0px 10px;
+  width: 15%;
+}
+
+.image {
+  height: 10%;
+}
+
+.onePhotoChunk {
+  border: 1px solid #6781e0;
+  margin: 10px;
+  padding: 10px;
+}
+
+span {
+  padding: 10px;
+}

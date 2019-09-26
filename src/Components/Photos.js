@@ -1,32 +1,124 @@
-import React from 'react';
-import { BrowserRouter as Router, Route, Link, Switch, Redirect } from "react-router-dom";
+import React from "react";
+import { Route, Link, Switch } from "react-router-dom";
+import Map from "./Map";
+import Details from "./Details";
 import "./button.css";
+import "./photos.css"
 
-const Photos = (props) => {
+class Photos extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      place: "",
+      places: [
+        { location: "hokkaido", checked: true },
+        { location: "kyoto", checked: true },
+        { location: "osaka", checked: true },
+        { location: "tokyo", checked: true }
+      ],
+      details: "hello"
+    };
+  }
+
+  locationSelectionHandler = event => {
+    // console.log(event.target.value);
+    // console.log(event.target.checked);
+
+    const places = this.state.places.map(x => {
+      if (x.location === event.target.value) {
+        x.checked = event.target.checked;
+      }
+      return x;
+    });
+
+    this.setState({ places });
+  };
+
+  // haha() {
+  //   console.log("haha");
+  // }
+
+  selectedPlaces() {
+    // this.haha();
+    return this.state.places.filter(p => p.checked).map(p => p.location);
+  }
+
+  displayDetails = () => {
+    this.setState({ details: this.state.details });
+  };
+
+  renderLocationMenu = () => {
+    return this.state.places.map(place => {
+      return (
+        <React.Fragment key={place.location}>
+          <input
+            className="checkbox"
+            id={place.location}
+            type="checkbox"
+            value={place.location}
+            defaultChecked={place.checked}
+            onChange={this.locationSelectionHandler}
+          />
+          <label htmlFor={place.location}>{place.location}</label>
+        </React.Fragment>
+      );
+    });
+  };
+
+  renderSelectedPhotos() {
+    return this.props.photosArray
+      .filter(photo => this.selectedPlaces().indexOf(photo.location) !== -1)
+      .map(photo => (
+        <div key={photo.id} className="onePhotoChunk">
+          <img
+            className="image"
+            alt={photo.name}
+            src={require(`../assets/${photo.name}.png`)}
+          ></img>
+          <h2>{photo.name}</h2>
+
+          <button className="button" onClick={this.displayDetails}>More Info</button>
+          <span>{photo.details}</span>
+        </div>
+      ));
+  }
+
+  render() {
     return (
-        props.photosArray.map(item => (
-            <Photo key={item.id} photo={item} />
-        ))
-    )
-}
+      <div>
+        <div className="mainNav">
+          <div className="nav">
+            <Link to="/">
+              <i className="fas fa-globe-asia"></i> Home
+            </Link>
+          </div>
+        </div>
+        <Switch>
+          <Route exact path="/" component={Map} />
+        </Switch>
 
-class Photo extends React.Component {
+        <form>{this.renderLocationMenu()}</form>
 
-    render () {
-        return (
-            <div>
-                
-                <h1>{this.props.photo.id}</h1>
-                <h2>{this.props.photo.location}</h2>
-                <img alt={this.props.photo.name} src={require(`../assets/${this.props.photo.name}.png`)}></img>
-                <h2>{this.props.photo.name}</h2>
-                
-                <Link className="button" to="/details">more info</Link>
+        <h1 className="selectedLocations">
+          {this.selectedPlaces().map(item => {
+            return <p key={item}>{item}</p>;
+          })}
+        </h1>
 
-                
-            </div>
-        )
-    }
+        {this.renderSelectedPhotos()}
+      </div>
+    );
+  }
 }
 
 export default Photos;
+
+{
+  /* <Link className="button" to="/details" onClick={this.displayDetails}>
+            more info
+          </Link>
+          <Switch>
+            <Route exact path="/details" component={() => <Details />} />
+          </Switch> */
+}
