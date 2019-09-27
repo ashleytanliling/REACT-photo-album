@@ -24,4 +24,5 @@
 a:-webkit-any-link {
   text-decoration: none;
   color: #8fed85;
+  font-size: 32px;
 }

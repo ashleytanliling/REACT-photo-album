@@ -1,9 +1,7 @@
 import React from "react";
-import { Route, Link, Switch } from "react-router-dom";
-import Photos from "./Photos";
-import { photosData } from "../assets/photosData";
 import { Map, GoogleApiWrapper, InfoWindow, Marker } from "google-maps-react";
 import "./map.css";
+import Banner from "./Banner";
 
 export class MapContainer extends React.Component {
   state = {
@@ -34,21 +32,7 @@ export class MapContainer extends React.Component {
   render() {
     return (
       <div>
-        <div className="mainNav">
-          <div className="nav">
-            <Link to="/photos">
-              <i className="far fa-images"></i> Photos
-            </Link>
-          </div>
-        </div>
-        <Switch>
-          <Route
-            exact
-            path="/photos"
-            component={() => <Photos photosArray={photosData} />}
-          />
-        </Switch>
-
+        <Banner {...this.props} />
         <Map
           google={this.props.google}
           zoom={6}
@@ -57,25 +41,25 @@ export class MapContainer extends React.Component {
         >
           <Marker
             position={{ lat: 43.0618, lng: 141.3545 }}
-            label={"2"}
+            label={"4"}
             onClick={this.onMarkerClick}
             name={"Hokkaido 北海道"}
           />
           <Marker
             position={{ lat: 35.0116, lng: 135.7681 }}
-            label={"5"}
+            label={"2"}
             onClick={this.onMarkerClick}
             name={"Kyoto 京都"}
           />
           <Marker
             position={{ lat: 34.6937, lng: 135.5023 }}
-            label={"3"}
+            label={"1"}
             onClick={this.onMarkerClick}
             name={"Osaka 大阪市"}
           />
           <Marker
             position={{ lat: 35.6762, lng: 139.6503 }}
-            label={"4"}
+            label={"5"}
             onClick={this.onMarkerClick}
             name={"Tokyo 東京"}
           />

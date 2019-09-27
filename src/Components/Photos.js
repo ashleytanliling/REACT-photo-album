@@ -1,9 +1,7 @@
 import React from "react";
-import { Route, Link, Switch } from "react-router-dom";
-import Map from "./Map";
-import Details from "./Details";
 import "./button.css";
-import "./photos.css"
+import "./photos.css";
+import Banner from "./Banner";
 
 class Photos extends React.Component {
   constructor(props) {
@@ -16,15 +14,11 @@ class Photos extends React.Component {
         { location: "kyoto", checked: true },
         { location: "osaka", checked: true },
         { location: "tokyo", checked: true }
-      ],
-      details: "hello"
+      ]
     };
   }
 
   locationSelectionHandler = event => {
-    // console.log(event.target.value);
-    // console.log(event.target.checked);
-
     const places = this.state.places.map(x => {
       if (x.location === event.target.value) {
         x.checked = event.target.checked;
@@ -35,18 +29,9 @@ class Photos extends React.Component {
     this.setState({ places });
   };
 
-  // haha() {
-  //   console.log("haha");
-  // }
-
   selectedPlaces() {
-    // this.haha();
     return this.state.places.filter(p => p.checked).map(p => p.location);
   }
-
-  displayDetails = () => {
-    this.setState({ details: this.state.details });
-  };
 
   renderLocationMenu = () => {
     return this.state.places.map(place => {
@@ -54,6 +39,7 @@ class Photos extends React.Component {
         <React.Fragment key={place.location}>
           <input
             className="checkbox"
+            aria-label="checkbox"
             id={place.location}
             type="checkbox"
             value={place.location}
@@ -78,7 +64,9 @@ class Photos extends React.Component {
           ></img>
           <h2>{photo.name}</h2>
 
-          <button className="button" onClick={this.displayDetails}>More Info</button>
+          {/* <button className="button" onClick={this.displayDetails}>
+            More Info
+          </button> */}
           <span>{photo.details}</span>
         </div>
       ));
@@ -87,24 +75,15 @@ class Photos extends React.Component {
   render() {
     return (
       <div>
-        <div className="mainNav">
-          <div className="nav">
-            <Link to="/">
-              <i className="fas fa-globe-asia"></i> Home
-            </Link>
-          </div>
-        </div>
-        <Switch>
-          <Route exact path="/" component={Map} />
-        </Switch>
+        <Banner {...this.props} />
 
-        <form>{this.renderLocationMenu()}</form>
+        <form data-testid="form-element">{this.renderLocationMenu()}</form>
 
-        <h1 className="selectedLocations">
+        <div className="selectedLocations">
           {this.selectedPlaces().map(item => {
             return <p key={item}>{item}</p>;
           })}
-        </h1>
+        </div>
 
         {this.renderSelectedPhotos()}
       </div>
@@ -113,12 +92,3 @@ class Photos extends React.Component {
 }
 
 export default Photos;
-
-{
-  /* <Link className="button" to="/details" onClick={this.displayDetails}>
-            more info
-          </Link>
-          <Switch>
-            <Route exact path="/details" component={() => <Details />} />
-          </Switch> */
-}
